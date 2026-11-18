@@ -134,7 +134,7 @@ h2 em{font-family:var(--serif);font-weight:400;font-style:italic;color:var(--hol
 
 /* picks */
 .picks{display:grid;grid-template-columns:1fr;gap:14px}
-@media(min-width:720px){.picks{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:720px){.picks{grid-template-columns:repeat(2,1fr)}.pick.special{grid-column:1/-1}}
 #thoughts{padding:40px 0}
 #thoughts .sh{margin-bottom:18px}
 .pick{padding:22px;gap:12px}
@@ -413,7 +413,7 @@ const DEALS = [
   {name:"Bombas", category:"Apparel & Basics", verdict:"hold", status:"expected", discount:40,
    offer:"Bombas' early 25%-off holiday sale has ended. Right now it's only 20% off a first order (code COMFORT20).",
    note:"Hold for fresh Black Friday offers, then compare exact pack prices when the new terms land.",
-   checked:"Nov 18, 2026 · retailer site", source:"https://bombas.com/pages/holiday-faqs", pick:{q:"Will Bombas packs go lower than 40%?", call:"Hold for fresh Black Friday offers."}},
+   checked:"Nov 18, 2026 · retailer site", source:"https://bombas.com/pages/holiday-faqs"},
   {name:"Quince", category:"Bags & Travel", verdict:"hold", status:"review", discount:0,
    offer:"Black Carry-All Tote listed at $92. The \"66% savings\" compares against traditional retail, not a previous Quince price.",
    note:"An extra Black Friday bag promotion hasn't been verified yet.",
