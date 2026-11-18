@@ -133,7 +133,11 @@ h2 em{font-family:var(--serif);font-weight:400;font-style:italic;color:var(--hol
 .reel-foot a{font-size:15px;font-weight:600;color:var(--mute)}
 
 /* picks */
-.picks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:14px}
+.picks{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:720px){.picks{grid-template-columns:repeat(2,1fr)}}
+#thoughts{padding:40px 0}
+#thoughts .sh{margin-bottom:18px}
+.pick{padding:22px;gap:12px}
 .pick{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:14px}
 .pick .q{font-family:var(--serif);font-style:italic;font-size:32px;line-height:1.08}
 .pick .row{display:flex;justify-content:space-between;align-items:center;gap:10px}
@@ -407,7 +411,7 @@ function shopUrl(d){
 */
 const DEALS = [
   {name:"Bombas", category:"Apparel & Basics", verdict:"hold", status:"expected", discount:40,
-   offer:"Will packs go lower than 40%? Bombas' early 25%-off holiday sale has ended. Right now it's only 20% off a first order (code COMFORT20).",
+   offer:"Bombas' early 25%-off holiday sale has ended. Right now it's only 20% off a first order (code COMFORT20).",
    note:"Hold for fresh Black Friday offers, then compare exact pack prices when the new terms land.",
    checked:"Nov 18, 2026 · retailer site", source:"https://bombas.com/pages/holiday-faqs", pick:{q:"Will Bombas packs go lower than 40%?", call:"Hold for fresh Black Friday offers."}},
   {name:"Quince", category:"Bags & Travel", verdict:"hold", status:"review", discount:0,
