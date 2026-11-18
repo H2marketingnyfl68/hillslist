@@ -133,20 +133,22 @@ h2 em{font-family:var(--serif);font-weight:400;font-style:italic;color:var(--hol
 .reel-foot a{font-size:15px;font-weight:600;color:var(--mute)}
 
 /* email signup */
-#signup{padding:40px 0}
-.signup{display:grid;grid-template-columns:1fr;gap:18px;background:var(--card);border:2px solid var(--hold);border-radius:24px;padding:clamp(22px,4vw,36px)}
-@media(min-width:820px){.signup{grid-template-columns:1fr 1.1fr;align-items:center;gap:32px}}
-.signup h2{margin:0 0 8px}
+#signup{padding:28px 0}
+.signup{display:grid;grid-template-columns:1fr;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(18px,3vw,26px)}
+@media(min-width:820px){.signup{grid-template-columns:auto 1fr;align-items:center;gap:32px}}
+.signup h2{margin:0 0 4px;font-size:clamp(26px,3.4vw,34px)}
 .signup-copy p{color:var(--mute);margin:0}
 .signup-form label{display:block;font-weight:600;margin-bottom:8px}
 .signup-row{display:flex;gap:10px;flex-wrap:wrap}
 .signup-row input{flex:1 1 220px;min-height:52px;padding:0 16px;border-radius:14px;border:2px solid #4a4656;background:#0f0e13;color:var(--ink);font:inherit;font-size:17px}
+.signup-row input::placeholder{color:#a9a4b8;opacity:1}
 .signup-row input:focus-visible{outline:3px solid var(--hit);outline-offset:2px;border-color:var(--hit)}
 .signup-row input[aria-invalid="true"]{border-color:var(--hold)}
 .signup-btn{min-height:52px;padding:0 24px;border:0;border-radius:99px;background:var(--hit);color:#15131a;font-family:var(--display);font-weight:800;font-size:17px;cursor:pointer}
 .signup-btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 .signup-btn[disabled]{opacity:.6;cursor:wait}
-.signup-msg{margin:10px 0 0;min-height:1.4em;font-size:15px;color:var(--mute)}
+.signup-msg{margin:6px 0 0;font-size:15px;color:var(--mute)}
+.signup-msg:empty{display:none}
 .signup-msg.ok{color:var(--hit)}.signup-msg.err{color:var(--hold)}
 /* picks */
 .picks{display:grid;grid-template-columns:1fr;gap:14px}
@@ -275,13 +277,13 @@ footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;al
   <div class="signup">
     <div class="signup-copy">
       <h2>Get my <em>next edit</em></h2>
-      <p>Cyber Monday, holiday gifting and beyond. My Hit or Hold calls, straight to your inbox. No spam, and you can unsubscribe anytime.</p>
+      <p>Hit or Hold, in your inbox. No spam.</p>
     </div>
     <form id="signupForm" class="signup-form" method="post" novalidate>
-      <label for="signupEmail">Email address</label>
+      <label for="signupEmail" class="sr">Email address</label>
       <div class="signup-row">
-        <input id="signupEmail" name="email_address" type="email" autocomplete="email" inputmode="email" required aria-describedby="signupMsg" placeholder="you@example.com">
-        <button type="submit" class="signup-btn">Sign me up</button>
+        <input id="signupEmail" name="email_address" type="email" autocomplete="email" inputmode="email" required aria-describedby="signupMsg" placeholder="Your email">
+        <button type="submit" class="signup-btn">Sign up</button>
       </div>
       <p id="signupMsg" class="signup-msg" role="status" aria-live="polite"></p>
     </form>
