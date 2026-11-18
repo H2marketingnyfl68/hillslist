@@ -331,7 +331,7 @@ footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;al
     <p>Hill's List is editorial opinion for general information only. It isn't financial advice, and a verdict isn't a promise that a price will drop, hold or be the lowest available.</p>
     <p>Prices, stock and terms change quickly and are set by each retailer. Always confirm the final price, exclusions, shipping and return policy at checkout. I'm not responsible for retailer errors, changes or availability.</p>
     <p>Retailer names and trademarks belong to their owners. Mentioning a brand doesn't mean it sponsors or endorses Hill's List, or that I'm affiliated with it.</p>
-    <p>If you sign up for emails, your address is stored with my email provider, Kit, and used only to send Hill's List updates. You can unsubscribe anytime from any email.</p>
+    <p>If you sign up for emails, your address is saved in my private Google Sheet and used only to send Hill's List updates. Reply “unsubscribe” to any email and I'll remove you.</p>
     <p>Hill's List uses Skimlinks, which can turn retailer links on this site into affiliate links automatically. Treat any Shop link as one that may earn me a commission. Retailers never pay for a verdict, and there are no sponsored placements.</p>
   </div>
   <div>
@@ -682,16 +682,18 @@ if(Object.keys(AFFILIATE).length){
   document.getElementById("affnote").textContent = "Some links are affiliate links, marked \"Affiliate link.\" If you buy through one, I may earn a commission at no extra cost to you. Commissions never change my Hit or Hold.";
 }
 
-/* ---------- EMAIL SIGNUP (Kit) ----------
-   Paste the Kit form ID below to switch the sign-up box on, e.g. "1234567". */
-const SIGNUP = { kitFormId: "" };
+/* ---------- EMAIL SIGNUP (Google Form → Google Sheet) ----------
+   Sign-ups go to Hillary's Google Form "Hill's List sign-ups", which saves them to a Google Sheet. */
+const SIGNUP = {
+  formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSeZPT-KkqR4MxyiZPueh-bxlijw4WmwgOhb1RmEG3SYW8sDXA/formResponse",
+  emailField: "entry.1694261592"
+};
 (function(){
-  if(!SIGNUP.kitFormId) return;
+  if(!SIGNUP.formUrl) return;
   const sec = document.getElementById("signup"); sec.hidden = false;
   const f = document.getElementById("signupForm"), inp = document.getElementById("signupEmail"),
         msg = document.getElementById("signupMsg"), btn = f.querySelector("button");
-  const action = "https://app.kit.com/forms/" + SIGNUP.kitFormId + "/subscriptions";
-  f.action = action;
+  inp.name = SIGNUP.emailField;
   f.addEventListener("submit", async e => {
     e.preventDefault();
     const v = inp.value.trim();
@@ -701,10 +703,10 @@ const SIGNUP = { kitFormId: "" };
     }
     inp.removeAttribute("aria-invalid"); btn.disabled = true; msg.className = "signup-msg"; msg.textContent = "Signing you up…";
     try{
-      const r = await fetch(action, {method:"POST", headers:{"Accept":"application/json"}, body:new FormData(f)});
-      if(!r.ok) throw new Error(r.status);
+      const body = new URLSearchParams(); body.append(SIGNUP.emailField, v);
+      await fetch(SIGNUP.formUrl, {method:"POST", mode:"no-cors", body});
       f.reset(); msg.className = "signup-msg ok";
-      msg.textContent = "You're on the list! Check your inbox to confirm.";
+      msg.textContent = "You're on the list! Watch your inbox for my next edit.";
     }catch(err){
       msg.className = "signup-msg err";
       msg.textContent = "That didn't go through. Please try again in a moment.";
