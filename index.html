@@ -82,6 +82,18 @@ h2 em{font-family:var(--serif);font-weight:400;font-style:italic;color:var(--hol
 .slot::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.08),transparent 18%,transparent 82%,rgba(0,0,0,.08));pointer-events:none}
 .slot .sym{font-size:clamp(56px,10vw,96px);line-height:1;margin-bottom:12px}
 .slot .lab{font-family:var(--display);font-weight:800;font-size:clamp(17px,3.4vw,30px);line-height:1.1;letter-spacing:-.01em}
+.slot .inner{width:100%;min-width:0}
+.slot{min-width:0}
+@media(max-width:620px){
+  #reel .wrap{padding-left:14px;padding-right:14px}
+  .reel{padding:22px 14px}
+  .slots{padding:6px;gap:6px}
+  .slot{padding:6px 2px;border-radius:14px}
+  .slot .cap{font-size:10px;letter-spacing:.08em;top:10px}
+  .slot .lab{padding:0 2px}
+  .reel::before{inset:6px;border-radius:26px}
+}
+.slot .lab{width:100%;padding:0 4px;box-sizing:border-box;overflow-wrap:normal;word-break:normal}
 .slot .cap{position:absolute;top:12px;left:0;right:0;font-size:clamp(11px,1.4vw,14px);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#5b5666}
 .slot.rolling .inner{animation:roll .09s linear infinite}
 .slot.landed .inner{animation:land .28s cubic-bezier(.3,1.6,.5,1)}
@@ -737,7 +749,21 @@ const win = v => {
 
 const SYM = {hit:["★","st"], hold:["♠","s"]};
 const syms = [["♠","s"],["♦","d"],["★","st"],["♥","s"],["♣","d"]];
-function face(el, cap, lab, sym){ el.innerHTML = `<span class="cap">${cap}</span><div class="inner"><div class="sym ${sym[1]}">${sym[0]}</div><div class="lab">${esc(lab)}</div></div>`; }
+function face(el, cap, lab, sym){ el.innerHTML = `<span class="cap">${cap}</span><div class="inner"><div class="sym ${sym[1]}">${sym[0]}</div><div class="lab">${esc(lab)}</div></div>`; fitLab(el); }
+// Shrink a slot label until every word fits inside the box, in no more than 3 lines.
+function fitLab(el){
+  const lab = el.querySelector(".lab"); if(!lab) return;
+  lab.style.fontSize = "";
+  let fs = parseFloat(getComputedStyle(lab).fontSize);
+  const lh = () => parseFloat(getComputedStyle(lab).fontSize)*1.1;
+  while(fs > 10 && (lab.scrollWidth > lab.clientWidth + 1 || lab.scrollHeight > lh()*3 + 2)){
+    fs -= 1; lab.style.fontSize = fs + "px";
+  }
+  lab.style.overflowWrap = lab.scrollWidth > lab.clientWidth + 1 ? "anywhere" : "";
+}
+function fitAll(){ ["s0","s1","s2"].forEach(id => { const e=document.getElementById(id); if(e) fitLab(e); }); }
+window.addEventListener("resize", fitAll);
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll); else fitAll();
 
 let last = -1, busy = false; const seen = new Set();
 $("#spin").addEventListener("click", () => {
