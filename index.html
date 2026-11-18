@@ -132,6 +132,22 @@ h2 em{font-family:var(--serif);font-weight:400;font-style:italic;color:var(--hol
 @media(max-width:620px){#spin{width:100%}}
 .reel-foot a{font-size:15px;font-weight:600;color:var(--mute)}
 
+/* email signup */
+#signup{padding:40px 0}
+.signup{display:grid;grid-template-columns:1fr;gap:18px;background:var(--card);border:2px solid var(--hold);border-radius:24px;padding:clamp(22px,4vw,36px)}
+@media(min-width:820px){.signup{grid-template-columns:1fr 1.1fr;align-items:center;gap:32px}}
+.signup h2{margin:0 0 8px}
+.signup-copy p{color:var(--mute);margin:0}
+.signup-form label{display:block;font-weight:600;margin-bottom:8px}
+.signup-row{display:flex;gap:10px;flex-wrap:wrap}
+.signup-row input{flex:1 1 220px;min-height:52px;padding:0 16px;border-radius:14px;border:2px solid #4a4656;background:#0f0e13;color:var(--ink);font:inherit;font-size:17px}
+.signup-row input:focus-visible{outline:3px solid var(--hit);outline-offset:2px;border-color:var(--hit)}
+.signup-row input[aria-invalid="true"]{border-color:var(--hold)}
+.signup-btn{min-height:52px;padding:0 24px;border:0;border-radius:99px;background:var(--hit);color:#15131a;font-family:var(--display);font-weight:800;font-size:17px;cursor:pointer}
+.signup-btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.signup-btn[disabled]{opacity:.6;cursor:wait}
+.signup-msg{margin:10px 0 0;min-height:1.4em;font-size:15px;color:var(--mute)}
+.signup-msg.ok{color:var(--hit)}.signup-msg.err{color:var(--hold)}
 /* picks */
 .picks{display:grid;grid-template-columns:1fr;gap:14px}
 @media(min-width:720px){.picks{grid-template-columns:repeat(2,1fr)}.pick.special{grid-column:1/-1}}
@@ -255,6 +271,23 @@ footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;al
   <div class="picks" id="picksGrid"></div>
 </div></section>
 
+<section id="signup" hidden><div class="wrap">
+  <div class="signup">
+    <div class="signup-copy">
+      <h2>Get my <em>next edit</em></h2>
+      <p>Cyber Monday, holiday gifting and beyond. My Hit or Hold calls, straight to your inbox. No spam, and you can unsubscribe anytime.</p>
+    </div>
+    <form id="signupForm" class="signup-form" method="post" novalidate>
+      <label for="signupEmail">Email address</label>
+      <div class="signup-row">
+        <input id="signupEmail" name="email_address" type="email" autocomplete="email" inputmode="email" required aria-describedby="signupMsg" placeholder="you@example.com">
+        <button type="submit" class="signup-btn">Sign me up</button>
+      </div>
+      <p id="signupMsg" class="signup-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</div></section>
+
 <section id="floor"><div class="wrap">
   <div class="sh"><h2>The deal <em>floor</em></h2><p>Every retailer I'm tracking. Filter by verdict, search or sort.</p></div>
   <p class="support">Shopping through these links costs you nothing extra and keeps Hill's List free and independent. My calls are never for sale.</p>
@@ -296,6 +329,7 @@ footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;al
     <p>Hill's List is editorial opinion for general information only. It isn't financial advice, and a verdict isn't a promise that a price will drop, hold or be the lowest available.</p>
     <p>Prices, stock and terms change quickly and are set by each retailer. Always confirm the final price, exclusions, shipping and return policy at checkout. I'm not responsible for retailer errors, changes or availability.</p>
     <p>Retailer names and trademarks belong to their owners. Mentioning a brand doesn't mean it sponsors or endorses Hill's List, or that I'm affiliated with it.</p>
+    <p>If you sign up for emails, your address is stored with my email provider, Kit, and used only to send Hill's List updates. You can unsubscribe anytime from any email.</p>
     <p>Hill's List uses Skimlinks, which can turn retailer links on this site into affiliate links automatically. Treat any Shop link as one that may earn me a commission. Retailers never pay for a verdict, and there are no sponsored placements.</p>
   </div>
   <div>
@@ -645,6 +679,36 @@ if(Object.keys(AFFILIATE).length){
   document.getElementById("discl").hidden = false;
   document.getElementById("affnote").textContent = "Some links are affiliate links, marked \"Affiliate link.\" If you buy through one, I may earn a commission at no extra cost to you. Commissions never change my Hit or Hold.";
 }
+
+/* ---------- EMAIL SIGNUP (Kit) ----------
+   Paste the Kit form ID below to switch the sign-up box on, e.g. "1234567". */
+const SIGNUP = { kitFormId: "" };
+(function(){
+  if(!SIGNUP.kitFormId) return;
+  const sec = document.getElementById("signup"); sec.hidden = false;
+  const f = document.getElementById("signupForm"), inp = document.getElementById("signupEmail"),
+        msg = document.getElementById("signupMsg"), btn = f.querySelector("button");
+  const action = "https://app.kit.com/forms/" + SIGNUP.kitFormId + "/subscriptions";
+  f.action = action;
+  f.addEventListener("submit", async e => {
+    e.preventDefault();
+    const v = inp.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){
+      inp.setAttribute("aria-invalid","true"); msg.className = "signup-msg err";
+      msg.textContent = "Please enter a valid email address, like name@example.com."; inp.focus(); return;
+    }
+    inp.removeAttribute("aria-invalid"); btn.disabled = true; msg.className = "signup-msg"; msg.textContent = "Signing you up…";
+    try{
+      const r = await fetch(action, {method:"POST", headers:{"Accept":"application/json"}, body:new FormData(f)});
+      if(!r.ok) throw new Error(r.status);
+      f.reset(); msg.className = "signup-msg ok";
+      msg.textContent = "You're on the list! Check your inbox to confirm.";
+    }catch(err){
+      msg.className = "signup-msg err";
+      msg.textContent = "That didn't go through. Please try again in a moment.";
+    }finally{ btn.disabled = false; }
+  });
+})();
 /* picks */
 $("#picksGrid").innerHTML = DEALS.filter(d => d.pick).sort((a,b) => (b.pick.special?1:0)-(a.pick.special?1:0)).map(d => `
   <article class="pick${d.pick.special?" special":""}">
