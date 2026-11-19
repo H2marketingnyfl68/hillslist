@@ -132,6 +132,11 @@ h2 em{font-family:var(--serif);font-weight:400;font-style:italic;color:var(--hol
 .reel::before{content:"";position:absolute;inset:10px;border-radius:24px;border:3px dashed #f4ff3a;pointer-events:none}
 .reel-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;position:relative}
 .reel-top .eyebrow{color:#f2d98a}
+.eyebrow.live{display:inline-block;line-height:1.25;font-family:var(--display);font-weight:800;font-size:clamp(14px,2.2vw,20px);letter-spacing:.05em;color:#15131a;background:var(--hit);padding:10px 18px;border-radius:99px;box-shadow:0 0 28px rgba(220,255,92,.35)}
+.eyebrow.live .dot{width:11px;height:11px;margin-right:10px;vertical-align:0;display:inline-block;background:var(--hold);box-shadow:0 0 0 3px rgba(255,95,180,.35);animation:livepulse 1.6s ease-in-out infinite}
+@keyframes livepulse{50%{transform:scale(1.35)}}
+@media (prefers-reduced-motion:reduce){.eyebrow.live .dot{animation:none}}
+@media(max-width:480px){.eyebrow.live{font-size:13px;letter-spacing:.02em;padding:9px 14px}.eyebrow.live .dot{width:9px;height:9px;margin-right:8px}}
 .reel-title{font-family:var(--display);font-weight:900;font-size:clamp(40px,8vw,72px);line-height:.95;letter-spacing:-.03em;color:#f4ff3a;text-shadow:0 0 28px rgba(244,255,58,.28)}
 .reel-title em{font-family:var(--serif);font-weight:400;color:#f4ff3a}
 .reel-title .star{color:#f4ff3a;font-size:.6em;vertical-align:.25em}
@@ -258,9 +263,9 @@ footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;al
 <main id="top">
 <h1 class="sr" id="content" tabindex="-1">Hill's List: Hit or Hold? <span class="edition"></span> Edit</h1>
 <div class="wrap intro-top">
-  <div class="eyebrow"><span class="dot" aria-hidden="true"></span>Now live: <span class="edition"></span> Edit</div>
+  <div class="eyebrow live"><span class="dot" aria-hidden="true"></span>Now live: <span class="edition"></span> Edit</div>
   <h2 class="htitle"><span class="hit">Hit</span> <span class="or">or</span><span class="hold">Hold?</span></h2>
-  <p class="lede"><strong>Shop now or wait?</strong> I read the fine print so you don't have to, then make the call. Feeling lucky? Spin the Deal Reel. <span class="sig">— Hillary</span></p>
+  <p class="lede"><strong>Shop now or wait?</strong> I'm reading all the Black Friday fine print so you don't have to, then making the call. Feeling lucky? Spin the Deal Reel. <span class="sig">— Hillary</span></p>
   <ul class="calls" aria-label="My three calls">
     <li><span class="tag hit">Hit</span> Buy now</li>
     <li><span class="tag split">Split</span> Buy some now, wait on the rest</li>
