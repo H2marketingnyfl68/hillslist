@@ -62,6 +62,10 @@ nav a:hover{color:var(--ink);background:var(--card)}
 .lede strong{color:var(--ink)}
 .sig{margin-top:14px;font-family:var(--serif);font-style:italic;font-size:22px;color:var(--mute)}
 
+/* three calls, up front */
+.calls{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 18px}
+.calls li{display:flex;align-items:center;gap:8px;font-size:16px;color:var(--ink)}
+.keyh{font-family:var(--display);font-weight:800;font-size:clamp(20px,2.4vw,24px);margin:0 0 14px}
 /* verdict key */
 .key{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:36px}
 .k{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 16px 18px}
@@ -257,6 +261,11 @@ footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;al
   <div class="eyebrow"><span class="dot" aria-hidden="true"></span>Now live: <span class="edition"></span> Edit</div>
   <h2 class="htitle"><span class="hit">Hit</span> <span class="or">or</span><span class="hold">Hold?</span></h2>
   <p class="lede"><strong>Shop now or wait?</strong> I read the fine print so you don't have to, then make the call. Feeling lucky? Spin the Deal Reel. <span class="sig">— Hillary</span></p>
+  <ul class="calls" aria-label="My three calls">
+    <li><span class="tag hit">Hit</span> Buy now</li>
+    <li><span class="tag split">Split</span> Buy some now, wait on the rest</li>
+    <li><span class="tag hold">Hold</span> Wait</li>
+  </ul>
 </div>
 <section id="reel" class="first"><div class="wrap">
   <div class="reel">
@@ -279,9 +288,10 @@ footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;al
   </div>
 </div></section>
 <div class="wrap hero" id="intro">
+  <h2 class="keyh">What my calls mean</h2>
   <div class="key" style="margin-top:0">
     <div class="k"><span class="tag hit">Hit</span><p>Buy now if your item qualifies. Black Friday could always go lower, but I don't expect it to beat this.</p></div>
-    <div class="k"><span class="tag split">Split</span><p>Some of each. Grab certain pieces now and wait on the rest. I'll tell you which.</p></div>
+    <div class="k"><span class="tag split">Split</span><p>It depends on what you're buying. Some items are worth grabbing now, others will get a better deal later. My note on each one tells you what to buy now and what to wait on.</p></div>
     <div class="k"><span class="tag hold">Hold</span><p>I'd wait. I expect a better deal, or the offer isn't clear enough yet to call.</p></div>
   </div>
 
