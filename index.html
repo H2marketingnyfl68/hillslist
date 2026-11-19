@@ -471,7 +471,7 @@ const LINKS = {
   "Cabela's": "https://www.cabelas.com/",
   "Sephora": "https://www.sephora.com/",
   "SharkNinja": "https://www.sharkninja.com/",
-  "Sick Science": "https://www.reallygoodstuff.com/shop/steve-spangler-science-products",
+  "Sick Science": "https://www.ulta.com/brand/sickscience-labs",
   "Supergoop!": "https://supergoop.com/",
   "TJ Maxx": "https://tjmaxx.tjx.com/",
   "TUMI": "https://www.tumi.com/",
@@ -528,12 +528,12 @@ const MORE = {
   "Basics & Sleep": ["Tommy John"],
   "Bags & Travel": ["Away","BÉIS","Coach","Coach Outlet","Kipling","Marc Jacobs","TUMI","Travelpro"],
   "Shoes": ["DSW","Dolce Vita","FitFlop","HOKA","Naturalizer","New Balance"],
-  "Beauty": ["Charlotte Tilbury","Kiehl's","NuFACE","Paula's Choice","Perricone MD","Sephora","Supergoop!","Ulta"],
+  "Beauty": ["Charlotte Tilbury","Kiehl's","NuFACE","Paula's Choice","Perricone MD","Sephora","Sick Science","Supergoop!","Ulta"],
   "Home": ["Brooklinen","The Home Depot","Crate & Barrel","Pottery Barn","Williams Sonoma"],
   "Tech & Appliances": ["Best Buy","SharkNinja"],
   "Department & Big Box": ["Amazon","Bloomingdale's","Costco","JCPenney","Macy's","Meijer","Nordstrom","Nordstrom Rack","Target","TJ Maxx"],
   "Sports & Outdoors": ["Academy Sports + Outdoors","Bass Pro Shops","Cabela's"],
-  "Kids & Gifts": ["Sick Science","The Noli Shop","Uncommon Goods"]
+  "Kids & Gifts": ["The Noli Shop","Uncommon Goods"]
 };
 Object.entries(MORE).forEach(([category, names]) => names.forEach(name =>
   DEALS.push({name, category, verdict:"hold", status:"review", discount:0, offer:"", note:"", checked:"", source:""})));
@@ -756,8 +756,8 @@ const UPDATES = {
     offer:"No Black Friday sale. TJX Rewards cardmembers get early shopping hours Nov 20–22, 8:30–10:30 a.m. Everyday prices are as usual."},
   "Parke": {status:"expected", discount:20, checked:"Nov 18, 2026 · TikTok Shop previews", source:"https://parkeofficial.com/",
     offer:"Expected Nov 23–30. Parke has a big, loyal following, and its restocks tend to sell out fast. Expect 20% off sitewide plus free shipping, with restocks and new drops. Look for Varsity Mocknecks, tees, denim, boxer pants and totes. In past years, select restocked favorites were 25% off automatically; new winter pieces were excluded. Not posted on Parke's site yet."},
-  "Sick Science": {status:"review", discount:0, checked:W, source:"https://www.stevespanglerscience.com/",
-    offer:"Steve Spangler Science no longer takes orders on its own site. Its products are sold at Really Good Stuff and Amazon. No Black Friday offer found."}
+  "Sick Science": {status:"confirmed", discount:30, checked:"Nov 18, 2026 · brand email", source:"https://www.ulta.com/brand/sickscience-labs",
+    offer:"SickScience Labs exosome skincare: all 4 serums are 30% off at Ulta Beauty through Nov 21."}
 };
 if(!DEALS.find(d=>d.name==="Kate Spade")) DEALS.push({name:"Kate Spade", category:"Bags & Travel", verdict:"hold", status:"review", discount:0, offer:"", note:"", checked:"", source:""});
 DEALS.forEach(d => { if(UPDATES[d.name]) Object.assign(d, UPDATES[d.name]); });
