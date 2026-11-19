@@ -12,13 +12,13 @@
 <meta property="og:site_name" content="Hill's List">
 <meta property="og:url" content="https://hillslist.com/">
 <meta property="og:title" content="Hill's List · Hit or Hold? Black Friday 2026 Edit">
-<meta property="og:description" content="Shop now or wait? I read the fine print on 60+ retailers and give each one a call: Hit or Hold.">
+<meta property="og:description" content="Shop now or wait? I read the fine print on 60+ retailers and give each one a call: Hit (buy now), Split (buy some, wait on the rest) or Hold (wait).">
 <meta property="og:image" content="https://hillslist.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Hill's List: Hit or Hold? Black Friday 2026 Edit at hillslist.com">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="description" content="Hill's List by Hillary Herskowitz: I check the offers, read the fine print and tell you Hit or Hold.">
+<meta name="description" content="Hill's List by Hillary Herskowitz: I check the offers, read the fine print and tell you Hit (buy now), Split (buy some now, wait on the rest) or Hold (wait).">
 <link rel="canonical" href="https://hillslist.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -276,7 +276,7 @@ footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;al
     <div class="slots" aria-hidden="true">
       <div class="slot" id="s0"><span class="cap">Category</span><div class="inner"><div class="sym s">♠</div><div class="lab">Shop by</div></div></div>
       <div class="slot" id="s1"><span class="cap">Retailer</span><div class="inner"><div class="sym d">♦</div><div class="lab">Hill's List</div></div></div>
-      <div class="slot" id="s2"><span class="cap">Verdict</span><div class="inner"><div class="sym st">★</div><div class="lab">Hit or Hold?</div></div></div>
+      <div class="slot" id="s2"><span class="cap">Verdict</span><div class="inner"><div class="sym st">★</div><div class="lab">Hit, Split or Hold?</div></div></div>
     </div>
     <div class="result" id="result" role="status" aria-live="polite">
       <p style="margin:0">Hit Spin. The reel picks a retailer and shows my call.</p>
@@ -295,7 +295,7 @@ footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;al
     <div class="k"><span class="tag hold">Hold</span><p>I'd wait. I expect a better deal, or the offer isn't clear enough yet to call.</p></div>
   </div>
 
-  <p class="discl" id="discl">Some links on Hill's List are affiliate links, so I may earn a commission if you buy. It never changes my Hit or Hold.</p>
+  <p class="discl" id="discl">Some links on Hill's List are affiliate links, so I may earn a commission if you buy. It never changes my Hit, Split or Hold.</p>
   <div class="meta"><span id="count">Retailers on the list</span><span>U.S. offers</span><span>Source and check time on every offer</span></div>
 </div>
 
@@ -310,7 +310,7 @@ footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;al
   <div class="signup">
     <div class="signup-copy">
       <h2>Get my <em>next edit</em></h2>
-      <p>Hit or Hold, in your inbox. No spam.</p>
+      <p>My Hit, Split and Hold calls, in your inbox. No spam.</p>
     </div>
     <form id="signupForm" class="signup-form" method="post" novalidate>
       <label for="signupEmail" class="sr">Email address</label>
@@ -357,8 +357,9 @@ footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;al
   <div>
     <h2 style="margin-bottom:18px">How I <em>check</em></h2>
     <p>This is an editorial guide, not a lowest-price guarantee or a live price feed. Every offer shows its status and when I last checked it.</p>
+    <p>Every retailer gets one of three calls. <strong>Hit:</strong> buy now, I don't expect Black Friday to beat it. <strong>Split:</strong> buy some things now and wait on the rest; my note tells you which. <strong>Hold:</strong> wait, I expect a better deal or the offer isn't clear enough yet.</p>
     <p>I don't publish coupon codes or predicted percentages. Each snapshot expires after 24 hours.</p>
-    <p id="affnote">Some links on Hill's List are affiliate links. If you buy through one, I may earn a commission at no extra cost to you. Commissions never change my Hit or Hold.</p>
+    <p id="affnote">Some links on Hill's List are affiliate links. If you buy through one, I may earn a commission at no extra cost to you. Commissions never change my Hit, Split or Hold.</p>
   </div>
   <dl>
     <div><dt class="status confirmed">Confirmed</dt><dd>An official source supported the offer when I checked.</dd></div>
@@ -762,7 +763,7 @@ $("#count").textContent = DEALS.length + (DEALS.length === 1 ? " retailer" : " r
 
 if(Object.keys(AFFILIATE).length){
   document.getElementById("discl").hidden = false;
-  document.getElementById("affnote").textContent = "Some links are affiliate links, marked \"Affiliate link.\" If you buy through one, I may earn a commission at no extra cost to you. Commissions never change my Hit or Hold.";
+  document.getElementById("affnote").textContent = "Some links are affiliate links, marked \"Affiliate link.\" If you buy through one, I may earn a commission at no extra cost to you. Commissions never change my Hit, Split or Hold.";
 }
 
 /* ---------- EMAIL SIGNUP (Google Form → Google Sheet) ----------
