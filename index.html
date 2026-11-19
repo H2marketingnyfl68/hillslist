@@ -199,7 +199,18 @@ h2 em{font-family:var(--serif);font-weight:400;font-style:italic;color:var(--hol
 .shopbtn:hover{background:var(--hit)}
 .srclink{display:inline-flex;align-items:center;min-height:24px;min-width:24px;padding:2px 0}
 .afflabel{font-size:12px;color:var(--dim)}
-.support{margin:-8px 0 22px;font-size:15px;color:var(--mute);border-left:3px solid var(--hit);padding-left:10px;max-width:620px}
+#floor .sh .lede{font-size:18px;color:var(--ink);max-width:460px}
+.howto{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin:-6px 0 18px}
+.howto h3{font-family:var(--display);font-weight:800;font-size:22px;margin-bottom:14px}
+.howto ol{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:0;padding:0}
+.howto li{display:flex;gap:12px;align-items:flex-start;font-size:17px;line-height:1.45;color:var(--ink)}
+.howto li b{display:block;font-size:18px;margin-bottom:4px}
+.howto .num{flex:none;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#111;font-family:var(--display);font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center}
+.howcall{display:flex;align-items:center;gap:10px;margin-top:8px;font-size:16px}
+.howcall .tag{flex:none;min-width:70px;justify-content:center}
+@media(max-width:760px){.howto ol{grid-template-columns:1fr}.howto{padding:18px 16px}}
+.support{margin:0 0 24px;font-size:17px;line-height:1.5;color:var(--ink);background:rgba(220,255,92,.08);border:1px solid var(--hit);border-radius:14px;padding:14px 18px;max-width:none}
+.support b{color:var(--hit)}
 .discl{margin-top:18px;font-size:14px;color:var(--mute);border-left:3px solid var(--hold);padding-left:10px}
 .item h3{font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:-.01em}
 .item .sub{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--dim)}
@@ -301,8 +312,18 @@ footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;al
 </div></section>
 
 <section id="floor"><div class="wrap">
-  <div class="sh"><h2>The deal <em>floor</em></h2><p>Every retailer I'm tracking. Filter by verdict, search or sort.</p></div>
-  <p class="support">Shopping through these links costs you nothing extra and keeps Hill's List free and independent. My calls are never for sale.</p>
+  <div class="sh"><h2>The deal <em>floor</em></h2><p class="lede">Every retailer I'm tracking, with my call on each one.</p></div>
+  <div class="howto" role="region" aria-labelledby="howtoH">
+    <h3 id="howtoH">How to use it</h3>
+    <ol>
+      <li><span class="num" aria-hidden="true">1</span><div><b>Find your store.</b> Type its name in the search box, or pick a category.</div></li>
+      <li><span class="num" aria-hidden="true">2</span><div><b>Read my call.</b>
+        <span class="howcall"><span class="tag hit">Hit</span> Buy now. I don't expect it to get cheaper.</span>
+        <span class="howcall"><span class="tag hold">Hold</span> Wait. A better deal is likely coming.</span></div></li>
+      <li><span class="num" aria-hidden="true">3</span><div><b>Tap "Shop".</b> It takes you straight to the store's own site.</div></li>
+    </ol>
+  </div>
+  <p class="support"><b>Free for you, always.</b> Shopping through these links costs you nothing extra and keeps Hill's List free and independent. My calls are never for sale.</p>
   <div class="controls">
     <div class="chips" id="vchips" role="group" aria-label="Filter by verdict"></div>
   </div>
@@ -429,7 +450,7 @@ const LINKS = {
   "Cabela's": "https://www.cabelas.com/",
   "Sephora": "https://www.sephora.com/",
   "SharkNinja": "https://www.sharkninja.com/",
-  "Sick Science": "https://www.stevespanglerscience.com/",
+  "Sick Science": "https://www.reallygoodstuff.com/shop/steve-spangler-science-products",
   "Supergoop!": "https://supergoop.com/",
   "TJ Maxx": "https://tjmaxx.tjx.com/",
   "TUMI": "https://www.tumi.com/",
@@ -582,8 +603,8 @@ const UPDATES = {
   "Nordstrom": {verdict:"hit", status:"confirmed", discount:60, checked:W, source:"https://www.nordstrom.com/browse/sale/black-friday/women",
     offer:"Black Friday Deals: up to 60% off select fashion and up to 30% off select beauty. Ends 12/1. Restrictions apply.",
     note:"Runs through Cyber Monday, so this is the Black Friday sale."},
-  "Nordstrom Rack": {verdict:"hold", status:"expected", discount:75, checked:"Nov 18, 2026 · news reports",
-    offer:"Deal sites report Black Friday markdowns up to 75% off. I couldn't confirm the terms on Nordstrom Rack's own site.",
+  "Nordstrom Rack": {verdict:"hold", status:"confirmed", discount:75, checked:W, source:"https://www.nordstromrack.com/",
+    offer:"Black Friday Scores: up to 75% off UGG, AllSaints, rag & bone and more, online and in stores, while supplies last. Extra 25% off select jewelry and watches through 12/1.",
     note:"Hold until I can confirm it."},
   "Nike": {verdict:"hold", status:"confirmed", discount:25, checked:W, source:"https://www.nike.com/w/black-friday-2phlm",
     offer:"Extra 25% off select styles with code EARLYBF. No end date posted.",
@@ -608,7 +629,7 @@ const UPDATES = {
     offer:"The Black Friday Event: sign in for 40% off everything with code LETSGO. Early access for Stars & Icons members. Exclusions apply.",
     note:"40% off everything is Madewell's Black Friday number."},
   "Anthropologie": {verdict:"hold", status:"announced", discount:40, checked:W, source:"https://www.anthropologie.com/black-friday",
-    offer:"Black Friday is coming soon, with AnthroPerks early access. Right now: extra 40% off sale styles.",
+    offer:"Black Friday is coming soon, with AnthroPerks early access. Anthropologie says it will be 30% off everything plus an extra 40% off sale. Right now: extra 40% off sale styles.",
     note:"Hold for Black Friday unless your item is already on sale."},
   "Free People": {verdict:"hold", status:"announced", discount:0, checked:W, source:"https://www.freepeople.com/the-black-friday-sale/",
     offer:"Free People's Black Friday sale isn't live yet.",
@@ -631,8 +652,8 @@ const UPDATES = {
   "Away": {verdict:"hold", status:"announced", discount:25, checked:W, source:"https://www.awaytravel.com/pages/black-friday-cyber-monday-deals",
     offer:"Early: 20% off when you bundle a suitcase with another item. Away says its biggest Black Friday deals arrive Thanksgiving week.",
     note:"Hold for the full sale."},
-  "Brooklinen": {verdict:"hit", status:"expected", discount:25, checked:"Nov 18, 2026 · news reports",
-    offer:"Reported: 25% off sitewide Nov 17 – Dec 2, plus rotating 48-hour bundles up to 40% off.",
+  "Brooklinen": {verdict:"hit", status:"confirmed", discount:25, checked:W, source:"https://www.brooklinen.com/",
+    offer:"Black Friday: 25% off everything with code BFCM26, plus rotating bundles up to 40% off. The current bundle deal ends Nov 19 at 7:30 a.m. ET.",
     note:"Runs through Cyber Monday, so there's no reason to wait. Not yet confirmed on Brooklinen's own site."},
   "Paula's Choice": {verdict:"hit", status:"confirmed", discount:30, checked:W, source:"https://www.paulaschoice.com/",
     offer:"30% off sitewide with code CYBER26, plus 1 free gift on $100+ or 3 free gifts on $150+.",
@@ -643,8 +664,8 @@ const UPDATES = {
   "Uncommon Goods": {verdict:"hit", status:"confirmed", discount:70, checked:W, source:"https://www.uncommongoods.com/sets/black-friday-deals",
     offer:"Black Friday deals are live on select gifts, about 20–70% off, plus free personalization on select items.",
     note:"Good for gifting now."},
-  "Bloomingdale's": {verdict:"hold", status:"review", discount:0, checked:"Nov 18, 2026 · news reports",
-    offer:"Its 20–25% off event ended Nov 16. The Black Friday page says to check back.",
+  "Bloomingdale's": {verdict:"hold", status:"confirmed", discount:50, checked:W, source:"https://www.bloomingdales.com/",
+    offer:"Black Friday: $25 off every $200. Also 15–25% off qualifying purchases through 11/22, plus the Designer Sale at up to 50% off.",
     note:"Hold."},
   "Alo": {verdict:"hold", status:"expected", discount:30, checked:"Nov 18, 2026 · Hillary's research",
     offer:"Alo's Black Friday sale is expected to start around Monday, Nov 23 and run through Cyber Monday, Nov 30, typically 30% off sitewide.",
@@ -678,7 +699,17 @@ const UPDATES = {
     note:"The bigger sale starts Monday. Hold."},
   "Avec Les Filles": {verdict:"hit", status:"confirmed", discount:50, checked:E, source:"https://www.aveclesfilles.com/",
     offer:"Day 1 Black Friday Flash Sale: 50% off the Faux Fur Short Peacoat Jacket ($178 → $89). Ends Nov 19 at 11:59 p.m. ET.",
-    note:"Hit if you want the jacket: half off won't get better. It's a daily flash sale, so check back for a new deal each day."}
+    note:"Hit if you want the jacket: half off won't get better. It's a daily flash sale, so check back for a new deal each day."},
+  "J.Crew": {status:"review", discount:20, checked:W, source:"https://www.jcrew.com/",
+    offer:"No Black Friday event posted yet. Right now: 20% off full-price styles with code APP20, in the J.Crew app only. Exclusions apply."},
+  "Quince": {checked:W, source:"https://www.quince.com/",
+    offer:"Black Carry-All Tote listed at $92. The \"66% savings\" compares against traditional retail, not a previous Quince price. No Black Friday sale on Quince's site yet."},
+  "TJ Maxx": {status:"confirmed", discount:0, checked:W, source:"https://tjmaxx.tjx.com/",
+    offer:"No Black Friday sale. TJX Rewards cardmembers get early shopping hours Nov 20–22, 8:30–10:30 a.m. Everyday prices are as usual."},
+  "Parke": {status:"review", discount:0, checked:W, source:"https://parkeofficial.com/",
+    offer:"No Black Friday sale on Parke's site yet. It says the next drop is coming soon."},
+  "Sick Science": {status:"review", discount:0, checked:W, source:"https://www.stevespanglerscience.com/",
+    offer:"Steve Spangler Science no longer takes orders on its own site. Its products are sold at Really Good Stuff and Amazon. No Black Friday offer found."}
 };
 if(!DEALS.find(d=>d.name==="Kate Spade")) DEALS.push({name:"Kate Spade", category:"Bags & Travel", verdict:"hold", status:"review", discount:0, offer:"", note:"", checked:"", source:""});
 DEALS.forEach(d => { if(UPDATES[d.name]) Object.assign(d, UPDATES[d.name]); });
