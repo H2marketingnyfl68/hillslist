@@ -900,10 +900,10 @@ const win = v => {
     for(let i=0;i<28;i++) tone(1800+Math.random()*2200,.05,"triangle",.035,.75+i*.045); // coin shower
     for(let i=0;i<3;i++) tone(1568,.08,"square",.05,2.1+i*.16);              // ding-ding-ding
   } else if(v==="split"){
-    // SPLIT: a playful see-saw — high, low, high, low — then a "ta-da" chord. Half yes, half wait.
-    [880,440,880,440].forEach((n,i)=> tone(n,.13,"triangle",.08,i*.15));
-    [659,831,988].forEach(n=> tone(n,.5,"sine",.06,.66));
-    tone(1319,.35,"sine",.04,.7);
+    // SPLIT: a "ta-da" chord first, then a playful see-saw — high, low, high, low. Half yes, half wait.
+    [659,831,988].forEach(n=> tone(n,.5,"sine",.06,0));
+    tone(1319,.35,"sine",.04,.04);
+    [880,440,880,440].forEach((n,i)=> tone(n,.13,"triangle",.08,.5+i*.15));
   } else {
     // HOLD: soft, low "not yet" — two gentle descending notes
     tone(392,.22,"sine",.06,0);
