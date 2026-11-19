@@ -65,7 +65,8 @@ nav a:hover{color:var(--ink);background:var(--card)}
 /* three calls, up front */
 .calls{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 18px}
 .calls li{display:flex;align-items:center;gap:8px;font-size:16px;color:var(--ink)}
-.keyh{font-family:var(--display);font-weight:800;font-size:clamp(20px,2.4vw,24px);margin:0 0 14px}
+.keyh{font-family:var(--display);font-weight:800;font-size:clamp(20px,2.4vw,24px);margin:6px 0 12px}
+#floor .key{margin:0 0 28px}
 /* verdict key */
 .key{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:36px}
 .k{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 16px 18px}
@@ -288,12 +289,6 @@ footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;al
   </div>
 </div></section>
 <div class="wrap hero" id="intro">
-  <h2 class="keyh">What my calls mean</h2>
-  <div class="key" style="margin-top:0">
-    <div class="k"><span class="tag hit">Hit</span><p>Buy now if your item qualifies. Black Friday could always go lower, but I don't expect it to beat this.</p></div>
-    <div class="k"><span class="tag split">Split</span><p>It depends on what you're buying. Some items are worth grabbing now, others will get a better deal later. My note on each one tells you what to buy now and what to wait on.</p></div>
-    <div class="k"><span class="tag hold">Hold</span><p>I'd wait. I expect a better deal, or the offer isn't clear enough yet to call.</p></div>
-  </div>
 
   <p class="discl" id="discl">Some links on Hill's List are affiliate links, so I may earn a commission if you buy. It never changes my Hit, Split or Hold.</p>
   <div class="meta"><span id="count">Retailers on the list</span><span>U.S. offers</span><span>Source and check time on every offer</span></div>
@@ -325,6 +320,13 @@ footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;al
 
 <section id="floor"><div class="wrap">
   <div class="sh"><h2>The deal <em>floor</em></h2><p class="lede">Every retailer I'm tracking, with my call on each one.</p></div>
+  <h3 class="keyh">What's my call?</h3>
+  <div class="key">
+    <div class="k"><span class="tag hit">Hit</span><p>Buy now if your item qualifies. Black Friday could always go lower, but I don't expect it to beat this.</p></div>
+    <div class="k"><span class="tag split">Split</span><p>It depends on what you're buying. Some items are worth grabbing now, others will get a better deal later. My note on each one tells you what to buy now and what to wait on.</p></div>
+    <div class="k"><span class="tag hold">Hold</span><p>I'd wait. I expect a better deal, or the offer isn't clear enough yet to call.</p></div>
+  </div>
+
   <div class="howto" role="region" aria-labelledby="howtoH">
     <h3 id="howtoH">How to use it</h3>
     <ol>
