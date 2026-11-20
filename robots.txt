@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /index%20(1).html
+Disallow: /index (1).html
+
+Sitemap: https://hillslist.com/sitemap.xml
