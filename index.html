@@ -346,7 +346,7 @@ footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;al
 .cd small{font-family:var(--sans);font-weight:600;font-size:11px;color:var(--mute);text-transform:uppercase}
 .bfbar .bflink{font-size:14px;font-weight:600;color:var(--mute);text-underline-offset:3px}
 .bfbar .bflink:hover{color:var(--ink)}
-@media(max-width:620px){.bfbar .bflink,.bfbar .bfw{display:none}.cd span{min-width:44px;font-size:16px;padding:2px 6px}.bfbar .lbl{font-size:13px}}
+@media(max-width:620px){.bfbar .bflink{display:none}.cd span{min-width:44px;font-size:16px;padding:2px 6px}.bfbar .lbl{font-size:13px}}
 </style>
 </head>
 <body>
@@ -852,8 +852,8 @@ const UPDATES = {
     offer:"Black Friday deals run Nov 27–30, members only, while supplies last. Holiday savings (Nov 16–30) are on now. Warehouses are closed Thanksgiving Day.",
     note:"New deals drop Black Friday weekend. Members only."},
   "JCPenney": {source:"https://corporate.jcpenney.com/2026/11/02/everyone-deserves-a-better-deal-at-jcpenney-they-get-one-period/", verdict:"hold", status:"confirmed", discount:0, checked:"Nov 20, 2026 · official announcement",
-    offer:"Black Friday prices run 10 days, Nov 20–29. Stores are closed Thanksgiving and open at 5 a.m. on Black Friday, with in-store giveaways.",
-    note:"Starts Friday. Hold until then."},
+    offer:"Black Friday prices have launched, running 10 days through Nov 29. Stores are closed Thanksgiving and open at 5 a.m. on Black Friday, with in-store giveaways.",
+    note:"Has launched."},
   "Meijer": {source:"https://www.meijer.com/shopping/collections/black-friday", verdict:"hold", status:"confirmed", discount:0, checked:"Nov 20, 2026 · retailer site",
     offer:"Black Friday deals are on now at meijer.com, with week-long and 3-day sales. For example, an Element 65\" 4K TV is $249.99 (was $499.99). The weekly ad runs Nov 18–26.",
     note:"Check the ad dates for your item before you go."},
@@ -875,7 +875,7 @@ const UPDATES = {
     offer:"No Black Friday sale posted yet. Kiehl's 2026 Holiday Gift Guide shows many items at 30% off, with the discount applied in the cart."},
   "Quince": {verdict:"hit", status:"confirmed", discount:30, checked:"Nov 20, 2026 · brand email + retailer site", source:"https://www.quince.com/shop/black-friday-deals-2026",
     offer:"Black Friday Early Access is on now, today only (Nov 20), in the Quince app only: up to 30% off select styles, including women's, men's, bags, bedding, jewelry, shoes and furniture. Free shipping and 365-day returns.",
-    note:"Hit. Quince rarely discounts, so up to 30% off is worth it. Shop in the app starting tomorrow."},
+    note:"Hit. Quince rarely discounts, so up to 30% off is worth it. Has launched. Shop in the app."},
   "TJ Maxx": {status:"confirmed", discount:0, checked:W, source:"https://tjmaxx.tjx.com/",
     offer:"No Black Friday sale. TJX Rewards cardmembers get early shopping hours Nov 20–22, 8:30–10:30 a.m. Everyday prices are as usual."},
   "Parke": {status:"expected", discount:20, checked:"Nov 18, 2026 · TikTok Shop previews", source:"https://parkeofficial.com/",
@@ -1167,7 +1167,7 @@ $("#spin").addEventListener("click", () => {
     if(now >= END){ bar.hidden = true; clearInterval(timer); return; }
     let target, html, spoken;
     if(now < BF){ target = BF; html = "Black Friday <em>in</em>"; }
-    else if(now < CM){ target = CM; html = "<span class=\"bfw\">It's Black Friday weekend · </span>Cyber Monday <em>in</em>"; }
+    else if(now < CM){ target = CM; html = "<span class=\"bfw\">Black Friday has launched · </span>Cyber Monday <em>in</em>"; }
     else { target = 0; html = "It's <em>Cyber Monday</em>"; }
     if(lbl.innerHTML !== html) lbl.innerHTML = html;
     if(!target){ cd.hidden = true; spoken = "It's Cyber Monday."; }
@@ -1177,7 +1177,7 @@ $("#spin").addEventListener("click", () => {
       set(el.d, d); set(el.h, pad(h)); set(el.m, pad(m)); set(el.s, pad(sec));
       cd.hidden = false;
       const days = d + (h||m||sec ? 1 : 0);
-      spoken = (target === BF ? "Black Friday is Friday, November 27" : "Cyber Monday is Monday, November 30") +
+      spoken = (target === BF ? "Black Friday is Friday, November 27" : "Black Friday has launched. Cyber Monday is Monday, November 30") +
                (days > 1 ? ", " + days + " days away." : days === 1 ? ", within a day." : ".");
     }
     if(spoken !== lastSr){ sr.textContent = spoken; lastSr = spoken; } // changes about once a day; not a live region
