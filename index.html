@@ -1090,7 +1090,12 @@ $("#spin").addEventListener("click", () => {
   const i = pick[Math.floor(Math.random()*pick.length)];
   seen.add(i);
   last = i; const f = DEALS[i];
-  const finals = [[f.category, syms[0]], [f.name, syms[1]], [V[f.verdict], SYM[f.verdict]]];
+  // Hit = jackpot: all three reels land on the same card suit (all spades, all diamonds...).
+  const SUITS = [["♠","s"],["♦","d"],["♥","s"],["♣","d"]];
+  const jack = SUITS[Math.floor(Math.random()*SUITS.length)];
+  const finals = f.verdict === "hit"
+    ? [[f.category, jack], [f.name, jack], [V[f.verdict], jack]]
+    : [[f.category, syms[0]], [f.name, syms[1]], [V[f.verdict], SYM[f.verdict]]];
   const caps = ["Category","Retailer","Verdict"];
   const reels = [0,1,2].map(n => $("#s"+n));
   const btn = $("#spin"); btn.disabled = true; btn.setAttribute("aria-busy","true");
