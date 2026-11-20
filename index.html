@@ -333,10 +333,31 @@ dd{color:var(--mute);font-size:15px}
 footer{border-top:1px solid var(--line);padding:36px 0 110px;color:var(--dim);font-size:14px}
 footer .logo{font-size:26px;color:var(--ink)}
 footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+
+/* Black Friday countdown strip */
+.bfbar{background:linear-gradient(90deg,#2b1330 0%,#17151d 50%,#0f2a24 100%);border-bottom:1px solid var(--line);color:var(--ink)}
+.bfbar[hidden]{display:none}
+.bfbar .wrap{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 14px;min-height:48px;padding-top:8px;padding-bottom:8px;text-align:center}
+.bfbar .lbl{margin:0;font-family:var(--display);font-weight:800;font-size:15px;letter-spacing:.06em;text-transform:uppercase}
+.bfbar .lbl em{font-style:normal;color:var(--hold)}
+.cd{display:flex;gap:6px}
+.cd[hidden]{display:none}
+.cd span{display:inline-flex;align-items:baseline;justify-content:center;gap:2px;min-width:50px;padding:3px 8px;border-radius:8px;background:var(--card);border:1px solid var(--line);font-family:var(--display);font-weight:900;font-size:18px;line-height:1.3;color:var(--hit);font-variant-numeric:tabular-nums}
+.cd small{font-family:var(--sans);font-weight:600;font-size:11px;color:var(--mute);text-transform:uppercase}
+.bfbar .bflink{font-size:14px;font-weight:600;color:var(--mute);text-underline-offset:3px}
+.bfbar .bflink:hover{color:var(--ink)}
+@media(max-width:620px){.bfbar .bflink,.bfbar .bfw{display:none}.cd span{min-width:44px;font-size:16px;padding:2px 6px}.bfbar .lbl{font-size:13px}}
 </style>
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
+
+<div class="bfbar" id="bfbar" role="region" aria-label="Black Friday countdown"><div class="wrap">
+  <p class="lbl" id="bfLbl">Black Friday is <em>Friday, Nov 27</em></p>
+  <div class="cd" id="bfCd" aria-hidden="true" hidden><span id="cdD">0<small>d</small></span><span id="cdH">00<small>h</small></span><span id="cdM">00<small>m</small></span><span id="cdS">00<small>s</small></span></div>
+  <p class="sr" id="bfSr"></p>
+  <a class="bflink" href="#floor">See what's on sale now <span aria-hidden="true">→</span></a>
+</div></div>
 
 <header><div class="wrap bar">
   <a class="logo" href="#top" aria-label="Hill's List, home">hill's list<b aria-hidden="true">.</b></a>
@@ -1129,6 +1150,39 @@ $("#spin").addEventListener("click", () => {
   });
   const update = () => { up.hidden = window.scrollY < 600; };
   addEventListener("scroll", update, {passive:true}); update();
+})();
+</script>
+<script>
+/* ---------- Black Friday countdown (Eastern Time) ---------- */
+(function(){
+  const bar = document.getElementById("bfbar"); if(!bar) return;
+  const BF = Date.UTC(2026,10,27,5), CM = Date.UTC(2026,10,30,5), END = Date.UTC(2026,11,1,5); // midnight ET
+  const lbl = document.getElementById("bfLbl"), cd = document.getElementById("bfCd"), sr = document.getElementById("bfSr");
+  const el = {d:document.getElementById("cdD"), h:document.getElementById("cdH"), m:document.getElementById("cdM"), s:document.getElementById("cdS")};
+  const pad = n => String(n).padStart(2,"0");
+  let lastSr = "", timer;
+  function set(node, val, unit){ node.firstChild.nodeValue = val; }
+  function tick(){
+    const now = Date.now();
+    if(now >= END){ bar.hidden = true; clearInterval(timer); return; }
+    let target, html, spoken;
+    if(now < BF){ target = BF; html = "Black Friday <em>in</em>"; }
+    else if(now < CM){ target = CM; html = "<span class=\"bfw\">It's Black Friday weekend · </span>Cyber Monday <em>in</em>"; }
+    else { target = 0; html = "It's <em>Cyber Monday</em>"; }
+    if(lbl.innerHTML !== html) lbl.innerHTML = html;
+    if(!target){ cd.hidden = true; spoken = "It's Cyber Monday."; }
+    else {
+      const t = Math.max(0, Math.floor((target - now)/1000));
+      const d = Math.floor(t/86400), h = Math.floor(t%86400/3600), m = Math.floor(t%3600/60), sec = t%60;
+      set(el.d, d); set(el.h, pad(h)); set(el.m, pad(m)); set(el.s, pad(sec));
+      cd.hidden = false;
+      const days = d + (h||m||sec ? 1 : 0);
+      spoken = (target === BF ? "Black Friday is Friday, November 27" : "Cyber Monday is Monday, November 30") +
+               (days > 1 ? ", " + days + " days away." : days === 1 ? ", within a day." : ".");
+    }
+    if(spoken !== lastSr){ sr.textContent = spoken; lastSr = spoken; } // changes about once a day; not a live region
+  }
+  tick(); timer = setInterval(tick, 1000);
 })();
 </script>
 <script type="text/javascript" src="https://s.skimresources.com/js/313243X1801955.skimlinks.js"></script>
