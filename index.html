@@ -912,7 +912,13 @@ const SIGNUP = {
   });
 })();
 /* picks */
-$("#picksGrid").innerHTML = DEALS.filter(d => d.pick).sort((a,b) => (b.pick.special?1:0)-(a.pick.special?1:0)).map(d => `
+/* General Hot Takes not tied to one retailer */
+const TAKES = [
+  {label:"Black Friday timing", v:"hold", q:"Will Black Friday deals get better closer to Black Friday?",
+   offer:"Early \"Black Friday\" sales are already everywhere. So do you buy now or wait?",
+   call:"Yes, I'm betting on it. The early sales are the warm-up, and the real markdowns hit Thanksgiving week. Unless my call is Hit, hold your cart. Amazon is the exception. Grab those deals now."}
+];
+$("#picksGrid").innerHTML = TAKES.map(t => ({name:t.label, verdict:t.v, offer:t.offer, pick:t})).concat(DEALS.filter(d => d.pick)).sort((a,b) => (b.pick.special?1:0)-(a.pick.special?1:0)).map(d => `
   <article class="pick${d.pick.special?" special":""}">
     <div class="row"><span class="who">${esc(d.pick.label||d.name)}</span><span class="tag ${d.pick.v||d.verdict}">${V[d.pick.v||d.verdict]}</span></div>
     <div class="q">${esc(d.pick.q)}</div>
