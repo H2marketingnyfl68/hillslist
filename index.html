@@ -234,6 +234,15 @@ h2 em{font-family:var(--serif);font-weight:400;font-style:italic;color:var(--hol
 @media(max-width:620px){#spin{width:100%}}
 .reel-foot a{font-size:15px;font-weight:600;color:var(--mute)}
 
+/* what I bought */
+#bought{padding:40px 0}
+#bought .sh{margin-bottom:18px}
+.bought{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:720px){.bought{grid-template-columns:repeat(3,1fr)}}
+.bought li{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--hit);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.bought .who{font-family:var(--display);font-weight:800;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.bought .what{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.1}
+.bought a{margin-top:auto;align-self:flex-start;font-size:15px;font-weight:600;color:var(--ink);text-underline-offset:3px}
 /* email signup */
 #signup{padding:28px 0}
 .signup{display:grid;grid-template-columns:1fr;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(18px,3vw,26px)}
@@ -413,6 +422,15 @@ footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;al
 <section id="thoughts"><div class="wrap">
   <div class="sh"><h2>Hill's <em>Hot Takes</em></h2><p>What's on my mind (and in my cart).</p></div>
   <div class="picks" id="picksGrid"></div>
+</div></section>
+
+<section id="bought" aria-labelledby="boughtH"><div class="wrap">
+  <div class="sh"><h2 id="boughtH">Already <em>bought</em></h2><p>Three things I didn't wait on.</p></div>
+  <ul class="bought">
+    <li><span class="who">BÉIS</span><span class="what">Grabbed it in the Black Friday sale</span><a href="https://beistravel.com/" target="_blank" rel="noopener">Shop BÉIS<span class="sr"> (opens in a new tab)</span> <span aria-hidden="true">↗</span></a></li>
+    <li><span class="who">Ulta</span><span class="what">Snapped up Sick Science at 30% off</span><a href="https://www.ulta.com/brand/sickscience-labs" target="_blank" rel="noopener">Shop Sick Science at Ulta<span class="sr"> (opens in a new tab)</span> <span aria-hidden="true">↗</span></a></li>
+    <li><span class="who">Amazon</span><span class="what">Estée Lauder Advanced Night Repair</span><a href="https://www.amazon.com/" target="_blank" rel="noopener">Shop Amazon<span class="sr"> (opens in a new tab)</span> <span aria-hidden="true">↗</span></a></li>
+  </ul>
 </div></section>
 
 <section id="signup" hidden><div class="wrap">
