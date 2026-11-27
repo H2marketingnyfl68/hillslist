@@ -327,6 +327,14 @@ h2 em{font-family:var(--serif);font-weight:400;font-style:italic;color:var(--hol
 .method{display:grid;grid-template-columns:1.1fr 1fr;gap:28px}
 @media(max-width:760px){.method{grid-template-columns:1fr}}
 .intro-top .lede{line-height:1.7}
+/* Black Friday day-of message + share */
+.today{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-top:22px;background:rgba(220,255,92,.08);border:1px solid var(--hit);border-radius:16px;padding:16px 18px}
+.today p{margin:0;flex:1 1 280px;font-size:clamp(17px,2.2vw,19px);color:var(--ink)}
+.today p strong{color:var(--hit)}
+.sharebtn{appearance:none;cursor:pointer;min-height:48px;padding:0 22px;border:0;border-radius:99px;background:var(--hit);color:#15131a;font-family:var(--display);font-weight:800;font-size:16px}
+.sharebtn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.sharemsg{flex-basis:100%;margin:0;font-size:15px;color:var(--hit)}
+.sharemsg:empty{display:none}
 .lede-link{color:inherit;text-decoration:underline;text-decoration-color:var(--hit);text-decoration-thickness:3px;text-underline-offset:.42em;text-decoration-skip-ink:none;padding-bottom:.12em}
 .method p{color:#d0cbd9;margin-bottom:12px}
 .faq{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 28px}
@@ -386,6 +394,11 @@ footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;al
   <div class="eyebrow live"><span class="dot" aria-hidden="true"></span>Now live: <span class="edition">Black Friday 2026</span> Edit</div>
   <h2 class="htitle"><span class="hit">Hit,</span> <span class="split">Split</span><span class="hold">or Hold?</span></h2>
   <p class="lede"><strong>Scoops on steals, one spin at a time.</strong> <a href="#reel" class="lede-link">Spin the Deal Reel</a> for a Black Friday deal and my call on it. Want the whole List? Scroll down. I've read all the fine print so you don't have to. <span class="sig">— Hillary</span></p>
+  <div class="today" role="region" aria-label="Black Friday is here">
+    <p><strong>The big day is here.</strong> Shop til you drop, and come back for new edits. Please share Hill's List with your friends!</p>
+    <button type="button" class="sharebtn" id="shareBtn">Share Hill's List</button>
+    <p class="sharemsg" id="shareMsg" role="status" aria-live="polite"></p>
+  </div>
   <ul class="calls" aria-label="My three calls">
     <li><span class="tag hit">Hit</span> Buy now</li>
     <li><span class="tag split">Split</span> Buy some now, wait on the rest</li>
@@ -1790,6 +1803,7 @@ $("#spin").addEventListener("click", () => {
     if(now >= END){ bar.hidden = true; clearInterval(timer); return; }
     let target, html, spoken;
     if(now < BF){ target = BF; html = "Black Friday <em>in</em>"; }
+    else if(now < BF + 864e5){ target = CM; html = "<span class=\"bfw\">The big day is here! Shop til you drop · </span>Cyber Monday <em>in</em>"; }
     else if(now < CM){ target = CM; html = "<span class=\"bfw\">Black Friday has launched · </span>Cyber Monday <em>in</em>"; }
     else { target = 0; html = "It's <em>Cyber Monday</em>"; }
     if(lbl.innerHTML !== html) lbl.innerHTML = html;
@@ -1806,6 +1820,21 @@ $("#spin").addEventListener("click", () => {
     if(spoken !== lastSr){ sr.textContent = spoken; lastSr = spoken; } // changes about once a day; not a live region
   }
   tick(); timer = setInterval(tick, 1000);
+})();
+</script>
+<script>
+/* ---------- Share Hill's List ---------- */
+(function(){
+  const btn = document.getElementById("shareBtn"), msg = document.getElementById("shareMsg");
+  if(!btn) return;
+  const url = "https://hillslist.com/", text = "Black Friday is here! Hillary read the fine print on every sale and calls each one. Shop til you drop:";
+  btn.addEventListener("click", async () => {
+    if(navigator.share){
+      try{ await navigator.share({title:"Hill's List", text, url}); return; }catch(e){ if(e && e.name === "AbortError") return; }
+    }
+    try{ await navigator.clipboard.writeText(url); msg.textContent = "Link copied! Paste it to a friend: " + url; }
+    catch(e){ msg.textContent = "Share this link: " + url; }
+  });
 })();
 </script>
 <script type="text/javascript" src="https://s.skimresources.com/js/313243X1801955.skimlinks.js"></script>
